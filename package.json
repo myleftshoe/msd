@@ -1,0 +1,26 @@
+{
+  "name": "@mls44/msdate",
+  "version": "0.1.0",
+  "description": "js dates in milliseconds",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myleftshoe/msdate.git"
+  },
+  "keywords": [
+    "js",
+    "javascript",
+    "dates",
+    "ms",
+    "milliseconds"
+  ],
+  "author": "mls44",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/myleftshoe/msdate/issues"
+  },
+  "homepage": "https://github.com/myleftshoe/msdate#readme"
+}

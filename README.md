@@ -3,7 +3,7 @@
 ## examples
 
 ```js
-const { arrayOf, days, now, hours, weeks, today, format, formatfp, toDate } = require('msdate')
+const { arrayOf, days, now, hours, weeks, today, format, formatfp, toDate } = require('@mls44/msdate')
 
 arrayOf({ days: 6 }, { weekday: 'long' }).from(today)
 [ 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday' ]
