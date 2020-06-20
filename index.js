@@ -35,7 +35,7 @@ const from = (u, n, f) => from => rangeOf(u, n).map(v => v + from).map(formatfp(
 
 function arrayOf(what, format) {
     if (typeof what === 'object') {
-        k = Object.keys(what)[0]
+        const k = Object.keys(what)[0]
         return { from: from(p[k], what[k], format) }
     }
     return { between: between(what, format) }
