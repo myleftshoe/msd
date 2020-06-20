@@ -58,7 +58,6 @@ const p = {
     format,
     formatfp,
     arrayOf,
-    between,
 }
 
 

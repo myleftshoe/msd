@@ -2,7 +2,7 @@
 
 Simple, flexible, functional
 
-## Install <sub><sup><sub><sup>(npm or yarn)</sup></sub></sup></sub>
+## Install <sub><sup>(npm or yarn)</sup></sub>
 
 ```js
 npm install @mls44/msdate
@@ -12,7 +12,7 @@ npm install @mls44/msdate
 yarn add @mls44/msdate
 ```
 
-## Use <sub><sup><sub><sup>(import or require)</sup></sub></sup></sub>
+## Use <sub><sup>(import or require)</sup></sub>
 
 ```js
 const { now, today, seconds, minutes, hours, days, weeks, years } = require('@mls44/msdate')
@@ -32,25 +32,28 @@ import { now, today, seconds, minutes, hours, days, weeks, years } from '@mls44/
 import { now, today, days, weeks, years, toDate } from '@mls44/msdate'
 
 now
- 1592656024000
+ 1592692591560
 
 today
- 1592575200000
+ 1592661600000
+
+fromDate(new Date())
+ 1592692591566
 
 toDate(today)
- 2020-06-19T14:00:00.000Z
-
-toDate(today + 1 * days)
  2020-06-20T14:00:00.000Z
 
+toDate(today + 1 * days)
+ 2020-06-21T14:00:00.000Z
+
 toDate(now + 1 * days)
- 2020-06-21T12:27:04.000Z
+ 2020-06-21T22:36:31.560Z
 
 toDate(today + 4 * weeks)
- 2020-07-17T14:00:00.000Z
+ 2020-07-18T14:00:00.000Z
 
 toDate(today + 10 * years)
- 2030-06-20T02:00:00.000Z
+ 2030-06-21T02:00:00.000Z
 
 ```
 
@@ -108,38 +111,73 @@ arrayOf(days, { weekday: 'long' }).between(today, today + days * 7)
 
 ```
 
-### Functional/Formatting
+### Formatting
+
+*msdate* uses [Intl.DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat). Provide an options object as per the spec to `format` and `formatfp`.
+
+`arrayOf` also accepts the same object (or even a function like `toDate`) as an optional second argument
 
 ```js
 
-import { now, today, arrayOf, toDate, format, formatfp } from '@mls44/msdate'
+import { now, today, toDate, format } from '@mls44/msdate'
 
 format(now,  toDate)
- 2020-06-20T12:28:55.941Z
+ 2020-06-20T23:20:27.448Z
 
 format(now, { weekday: 'long' })
- Saturday
+ Sunday
+
+```
+
+### Functional
+
+`toDate` and `fromDate` can be used functionally, e.g. `[...].map(toDate)`.
+
+`formatfp` is provided for this purpose also
+
+```js
+
+import { now, today, arrayOf, toDate, fromDate, format, formatfp } from '@mls44/msdate'
 
 arrayOf({ days: 7 }).from(today).map(toDate)
  [
-  2020-06-19T14:00:00.000Z,
   2020-06-20T14:00:00.000Z,
   2020-06-21T14:00:00.000Z,
   2020-06-22T14:00:00.000Z,
   2020-06-23T14:00:00.000Z,
   2020-06-24T14:00:00.000Z,
-  2020-06-25T14:00:00.000Z
+  2020-06-25T14:00:00.000Z,
+  2020-06-26T14:00:00.000Z
 ]
 
 arrayOf({ days: 7 }).from(today).map(formatfp({ weekday: 'long' }))
  [
-  'Saturday',
   'Sunday',
   'Monday',
   'Tuesday',
   'Wednesday',
   'Thursday',
-  'Friday'
+  'Friday',
+  'Saturday'
+]
+
+[
+    new Date('2020-06-19T14:00:00.000Z'),
+    new Date('2020-06-20T14:00:00.000Z'),
+    new Date('2020-06-21T14:00:00.000Z'),
+    new Date('2020-06-22T14:00:00.000Z'),
+    new Date('2020-06-23T14:00:00.000Z'),
+    new Date('2020-06-24T14:00:00.000Z'),
+    new Date('2020-06-25T14:00:00.000Z')
+].map(fromDate)
+ [
+  1592575200000,
+  1592661600000,
+  1592748000000,
+  1592834400000,
+  1592920800000,
+  1593007200000,
+  1593093600000
 ]
 
 ```
