@@ -5,27 +5,27 @@ console.log(c0)
 
 console.log(days)
 
-const f1 = arrayOf({ days: 6 }, { weekday: 'long' }).from(today)
+const f1 = arrayOf(days, 6, { weekday: 'long' }).from(today)
 console.log()
 console.log("arrayOf({ days: 6 }, { weekday: 'long' }).from(today)")
 console.log(f1)
 
-const f2 = arrayOf({ days: 6 }, toDate).from(today).map(format({ weekday: 'long' }))
+const f2 = arrayOf(days, 6, toDate).from(today).map(format({ weekday: 'long' }))
 console.log()
 console.log("arrayOf({ days: 6 }, toDate).from(today).map(format({ weekday: 'long' }))")
 console.log(f2)
 
-const f3 = arrayOf({ days: 6 }, toDate).from(today)
+const f3 = arrayOf( days, 6, toDate).from(today)
 console.log()
 console.log("arrayOf({ days: 6 }, toDate).from(today)")
 console.log(f3)
 
-const f4 = arrayOf({ days: 6 }).from(today).map(toDate)
+const f4 = arrayOf( days, 6).from(today).map(toDate)
 console.log()
 console.log("arrayOf({ days: 6 }).from(today).map(toDate)")
 console.log(f4)
 
-const f5 = arrayOf({ weeks: 4 }).from(today).map(toDate)
+const f5 = arrayOf( weeks, 4 ).from(today).map(toDate)
 console.log()
 console.log("arrayOf({ weeks: 4 }).from(today).map(toDate)")
 console.log(f5)

@@ -28,7 +28,7 @@ const _formatfp = f => ms => _format(ms, f)
 const _formatph = {
     apply: (target, self, args) => {
         if (args.length > 1)
-            return target(...args)
+            return _format(...args)
         else
             return _formatfp(args[0])
     }
@@ -40,16 +40,26 @@ const rangeOf = (unit, count, start = 0) => range(count, 0).map(n => n * unit + 
 const between = (u, f) => (start, end) => rangeOf(u, (end - start) / u, start).map(format(f))
 const from = (u, n, f) => from => rangeOf(u, n).map(v => v + from).map(format(f))
 
-function arrayOf(what, format) {
-    if (typeof what === 'object') {
-        const k = Object.keys(what)[0]
-        return { from: from(p[k], what[k], format) }
+const _between = (u, f) => ({ between: between(u, f) })
+const _from = (u, n, f) => ({ from: from(u, n, f) })
+const _arrayOf = {
+    apply: (target, self, args) => {
+        switch (args.length) {
+            case 1: return _between(...args)
+            case 3: return _from(...args)
+            case 2: {
+                if (typeof args[1] === 'number')
+                    return _from(...args)
+                else
+                    return _between(...args)
+            }
+        }
     }
-    return { between: between(what, format) }
 }
+const arrayOf = new Proxy(_between, _arrayOf)
 
 
-const p = {
+module.exports = {
     seconds: s,
     days: d,
     minutes: m,
@@ -66,6 +76,4 @@ const p = {
     arrayOf,
 }
 
-
-module.exports = { ...p }
 
