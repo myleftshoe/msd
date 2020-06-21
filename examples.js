@@ -1,18 +1,18 @@
-const { arrayOf, days, now, hours, weeks, today, format, formatfp, toDate } = require('.')
+const { arrayOf, days, now, hours, weeks, today,  format, toDate } = require('.')
 
-// const c0 = arrayOf(days).between(today - days * 2, today - days * 2 + days * 6).map(formatfp({ weekday: 'long' }))
-// console.log(c0)
+const c0 = arrayOf(days).between(today - days * 2, today - days * 2 + days * 6).map(format({ weekday: 'long' }))
+console.log(c0)
 
-//console.log(days)
+console.log(days)
 
 const f1 = arrayOf({ days: 6 }, { weekday: 'long' }).from(today)
 console.log()
 console.log("arrayOf({ days: 6 }, { weekday: 'long' }).from(today)")
 console.log(f1)
 
-const f2 = arrayOf({ days: 6 }, toDate).from(today).map(formatfp({ weekday: 'long' }))
+const f2 = arrayOf({ days: 6 }, toDate).from(today).map(format({ weekday: 'long' }))
 console.log()
-console.log("arrayOf({ days: 6 }, toDate).from(today).map(formatfp({ weekday: 'long' }))")
+console.log("arrayOf({ days: 6 }, toDate).from(today).map(format({ weekday: 'long' }))")
 console.log(f2)
 
 const f3 = arrayOf({ days: 6 }, toDate).from(today)
@@ -49,3 +49,5 @@ const a1 = toDate(today + weeks * 2 + days * 2)
 console.log()
 console.log("toDate(today + weeks * 2 + days * 2)")
 console.log(a1)
+
+

@@ -17,7 +17,6 @@ function setLocale(string) {
 const toDate = ms => new Date(ms)
 const fromDate = date => date.getTime()
 
-//PRIVATE//
 function _format(ms, f) {
     switch (typeof f) {
         case 'object': return new Intl.DateTimeFormat(locale, { ...f }).format(ms)
@@ -25,13 +24,21 @@ function _format(ms, f) {
         default: return ms
     }
 }
-const format = (ms, f) => _format(ms ,f)
-const formatfp = f => ms => _format(ms ,f)
+const _formatfp = f => ms => _format(ms, f)
+const _formatph = {
+    apply: (target, self, args) => {
+        if (args.length > 1)
+            return target(...args)
+        else
+            return _formatfp(args[0])
+    }
+}
+const format = new Proxy(_format, _formatph)
 
 const range = (size, start = 0) => Array(size).fill(start).map((v, i) => v + i)
 const rangeOf = (unit, count, start = 0) => range(count, 0).map(n => n * unit + start)
-const between = (u, f) => (start, end) => rangeOf(u, (end - start) / u, start).map(formatfp(f))
-const from = (u, n, f) => from => rangeOf(u, n).map(v => v + from).map(formatfp(f))
+const between = (u, f) => (start, end) => rangeOf(u, (end - start) / u, start).map(format(f))
+const from = (u, n, f) => from => rangeOf(u, n).map(v => v + from).map(format(f))
 
 function arrayOf(what, format) {
     if (typeof what === 'object') {
@@ -56,7 +63,6 @@ const p = {
     toDate,
     fromDate,
     format,
-    formatfp,
     arrayOf,
 }
 
