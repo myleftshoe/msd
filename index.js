@@ -24,14 +24,13 @@ function _format(ms, f) {
         default: return ms
     }
 }
-const _formatfp = f => ms => _format(ms, f)
-const _formatph = {
+_format.proxyHandler = {
     apply: (target, self, args) => {
-        if (args.length === 1) return _formatfp(args[0])
+        if (args.length === 1) return ms => _format(ms, args[0])
         return _format(...args)
     }
 }
-const format = new Proxy(_format, _formatph)
+const format = new Proxy(_format, _format.proxyHandler)
 
 const range = (size, start = 0) => Array(size).fill(start).map((v, i) => v + i)
 const rangeOf = (unit, count, start = 0) => range(count, 0).map(n => n * unit + start)
