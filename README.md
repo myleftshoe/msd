@@ -63,7 +63,7 @@ toDate(today + 10 * years)
 
 import { arrayOf, days, today, toDate } from '@mls44/msdate'
 
-arrayOf({ days: 7 }).from(today)
+arrayOf(days, 7).from(today)
  [
   1592575200000,
   1592661600000,
@@ -74,7 +74,7 @@ arrayOf({ days: 7 }).from(today)
   1593093600000
 ]
 
-arrayOf({ days: 7 }, toDate).from(today)
+arrayOf(days, 7, toDate).from(today)
  [
   2020-06-19T14:00:00.000Z,
   2020-06-20T14:00:00.000Z,
@@ -85,7 +85,7 @@ arrayOf({ days: 7 }, toDate).from(today)
   2020-06-25T14:00:00.000Z
 ]
 
-arrayOf({ days: 7 }, { weekday: 'long' }).from(today)
+arrayOf(days, 7, { weekday: 'long' }).from(today)
  [
   'Saturday',
   'Sunday',
@@ -113,9 +113,9 @@ arrayOf(days, { weekday: 'long' }).between(today, today + days * 7)
 
 ### Formatting
 
-*msdate* uses [Intl.DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat). Provide an options object as per the spec to `format` and `formatfp`.
+*msdate* uses [Intl.DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat). Provide an options object as per the spec to `format`.
 
-`arrayOf` also accepts the same object (or even a function like `toDate`) as an optional second argument
+`arrayOf` also accepts the same object (or even a function like `toDate`) as an optional second argument (see above examples).
 
 ```js
 
@@ -131,15 +131,13 @@ format(now, { weekday: 'long' })
 
 ### Functional
 
-`toDate` and `fromDate` can be used functionally, e.g. `[...].map(toDate)`.
-
-`formatfp` is provided for this purpose also
+`toDate`, `fromDate`, and `format` can be used functionally, e.g. `[...].map(toDate)`.
 
 ```js
 
-import { now, today, arrayOf, toDate, fromDate, format, formatfp } from '@mls44/msdate'
+import { now, today, arrayOf, days, toDate, fromDate, format } from '@mls44/msdate'
 
-arrayOf({ days: 7 }).from(today).map(toDate)
+arrayOf(days, 7).from(today).map(toDate)
  [
   2020-06-20T14:00:00.000Z,
   2020-06-21T14:00:00.000Z,
@@ -150,7 +148,7 @@ arrayOf({ days: 7 }).from(today).map(toDate)
   2020-06-26T14:00:00.000Z
 ]
 
-arrayOf({ days: 7 }).from(today).map(formatfp({ weekday: 'long' }))
+arrayOf(days, 7).from(today).map(format({ weekday: 'long' }))
  [
   'Sunday',
   'Monday',
