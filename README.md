@@ -111,6 +111,13 @@ arrayOf(days, { weekday: 'long' }).between(today, today + days * 7)
 
 ```
 
+In the above examples, you need to import `days`. Alternatively you can call `arrayOf` like this:
+
+```
+arrayOf('days', 7)
+arrayOf({ days: 7})
+```
+
 ### Formatting
 
 *msdate* uses [Intl.DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat). Provide an options object as per the spec to `format`.
