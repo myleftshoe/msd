@@ -32,10 +32,10 @@ _format.proxyHandler = {
 }
 const format = new Proxy(_format, _format.proxyHandler)
 
-function range (size, start = 0) {
+function range(size, start = 0) {
     if (size < 0) {
         size = -size
-        start-= size
+        start -= size
     }
     return Array(size).fill(start).map((v, i) => v + i)
 }
