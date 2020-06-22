@@ -1,33 +1,115 @@
-const { arrayOf, days, now, hours, weeks, today, format, toDate } = require('.')
+const { arrayOf, days, now, hours, weeks, years, today, format, toDate } = require('.')
 
-console.log(days)
+// --------------------------------------------------
 
-const a1 = toDate(today + weeks * 2 + days * 2)
-console.log(a1)
+log("arrayOf(days, 7).from(today)", arrayOf(days, 7).from(today))
 
-const f1 = arrayOf(days, 6, { weekday: 'long' }).from(today)
-console.log(f1)
+log("arrayOf('days', 7).from(today)", arrayOf('days', 7).from(today))
 
-const f2 = arrayOf(days, 6, toDate).from(today).map(format({ weekday: 'long' }))
-console.log(f2)
+log("arrayOf({ days: 7 }).from(today)", arrayOf({ days: 7 }).from(today))
 
-const f3 = arrayOf(days, 6, toDate).from(today)
-console.log(f3)
 
-const f4 = arrayOf(days, 6).from(today).map(toDate)
-console.log(f4)
+log("arrayOf(days, 7, { weekday: 'long' }).from(today)", arrayOf(days, 7, { weekday: 'long' }).from(today))
 
-const f5 = arrayOf(weeks, 4).from(today).map(toDate)
-console.log(f5)
+log("arrayOf('days', 7, { weekday: 'long' }).from(today)", arrayOf('days', 7, { weekday: 'long' }).from(today))
 
-const f6 = format(now, { weekday: 'long' })
-console.log(f6)
+log("arrayOf({ days: 7 }, { weekday: 'long' }).from(today)", arrayOf({ days: 7 }, { weekday: 'long' }).from(today))
 
-const f7 = format(now, toDate)
-console.log(f7)
 
-const b1 = arrayOf(days, { weekday: 'long' }).between(today, today + days * 7)
-console.log(b1)
+log("arrayOf(days, 7).from(today).map(format({ weekday: 'long' }))", arrayOf(days, 7).from(today).map(format({ weekday: 'long' })))
 
-const c0 = arrayOf(days).between(today - days * 2, today - days * 2 + days * 6).map(format({ weekday: 'long' }))
-console.log(c0)
+log("arrayOf('days', 7).from(today).map(format({ weekday: 'long' }))", arrayOf('days', 7).from(today).map(format({ weekday: 'long' })))
+
+log("arrayOf({ days: 7 }).from(today).map(format({ weekday: 'long' }))", arrayOf({ days: 7 }).from(today).map(format({ weekday: 'long' })))
+
+
+log("arrayOf(years, 7, { year: 'numeric' }).from(today)", arrayOf(years, 7, { year: 'numeric' }).from(today))
+
+log("arrayOf('years', 7, { year: 'numeric' }).from(today)", arrayOf('years', 7, { year: 'numeric' }).from(today))
+
+log("arrayOf({ years: 7 }, { year: 'numeric' }).from(today)", arrayOf({ years: 7 }, { year: 'numeric' }).from(today))
+
+
+log("arrayOf(years, 7).from(today).map(format({ year: 'numeric' }))", arrayOf(years, 7).from(today).map(format({ year: 'numeric' })))
+
+log("arrayOf('years', 7).from(today).map(format({ year: 'numeric' }))", arrayOf('years', 7).from(today).map(format({ year: 'numeric' })))
+
+log("arrayOf({ years: 7 }).from(today).map(format({ year: 'numeric' }))", arrayOf({ years: 7 }).from(today).map(format({ year: 'numeric' })))
+
+
+log("arrayOf(days, 7, toDate).from(today)", arrayOf(days, 7, toDate).from(today))
+
+log("arrayOf('days', 7, toDate).from(today)", arrayOf('days', 7, toDate).from(today))
+
+log("arrayOf({ days: 7 }, toDate).from(today)", arrayOf({ days: 7 }, toDate).from(today))
+
+
+log("arrayOf(days, 7, toDate).from(today).map(toDate)", arrayOf(days, 7, toDate).from(today).map(toDate))
+
+log("arrayOf('days', 7, toDate).from(today).map(toDate)", arrayOf('days', 7, toDate).from(today).map(toDate))
+
+log("arrayOf({ days: 7 }, toDate).from(today).map(toDate)", arrayOf({ days: 7 }, toDate).from(today).map(toDate))
+
+// --------------------------------------------------
+
+log("arrayOf(days).between(today, today + 7 * days)", arrayOf(days).between(today, today + 7 * days))
+
+log("arrayOf('days').between(today, today + 7 * days)", arrayOf('days').between(today, today + 7 * days))
+
+log("arrayOf({ days }).between(today, today + 7 * days)", arrayOf({ days }).between(today, today + 7 * days))
+
+
+log("arrayOf(days, { weekday: 'long' }).between(today, today + 7 * days)", arrayOf(days, { weekday: 'long' }).between(today, today + 7 * days))
+
+log("arrayOf('days', { weekday: 'long' }).between(today, today + 7 * days)", arrayOf('days', { weekday: 'long' }).between(today, today + 7 * days))
+
+log("arrayOf({ days }, { weekday: 'long' }).between(today, today + 7 * days)", arrayOf({ days }, { weekday: 'long' }).between(today, today + 7 * days))
+
+
+log("arrayOf(days).between(today, today + 7 * days).map(format({ weekday: 'long' }))", arrayOf(days).between(today, today + 7 * days).map(format({ weekday: 'long' })))
+
+log("arrayOf('days').between(today, today + 7 * days).map(format({ weekday: 'long' }))", arrayOf('days').between(today, today + 7 * days).map(format({ weekday: 'long' })))
+
+log("arrayOf({ days }).between(today, today + 7 * days).map(format({ weekday: 'long' }))", arrayOf({ days }).between(today, today + 7 * days).map(format({ weekday: 'long' })))
+
+
+log("arrayOf(years, { year: 'numeric' }).between(today, today + 7 * years)", arrayOf(years, { year: 'numeric' }).between(today, today + 7 * years))
+
+log("arrayOf('years', { year: 'numeric' }).between(today, today + 7 * years)", arrayOf('years', { year: 'numeric' }).between(today, today + 7 * years))
+
+log("arrayOf({ years }, { year: 'numeric' }).between(today, today + 7 * years)", arrayOf({ years }, { year: 'numeric' }).between(today, today + 7 * years))
+
+
+log("arrayOf(years).between(today, today + 7 * years).map(format({ year: 'numeric' }))", arrayOf(years).between(today, today + 7 * years).map(format({ year: 'numeric' })))
+
+log("arrayOf('years').between(today, today + 7 * years).map(format({ year: 'numeric' }))", arrayOf('years').between(today, today + 7 * years).map(format({ year: 'numeric' })))
+
+log("arrayOf({ years }).between(today, today + 7 * years).map(format({ year: 'numeric' }))", arrayOf({ years }).between(today, today + 7 * years).map(format({ year: 'numeric' })))
+
+
+log("arrayOf(days, toDate).between(today, today + 7 * days)", arrayOf(days, toDate).between(today, today + 7 * days))
+
+log("arrayOf('days', toDate).between(today, today + 7 * days)", arrayOf('days', toDate).between(today, today + 7 * days))
+
+log("arrayOf({ days }, toDate).between(today, today + 7 * days)", arrayOf({ days }, toDate).between(today, today + 7 * days))
+
+
+log("arrayOf(days, toDate).between(today, today + 7 * days).map(toDate)", arrayOf(days, toDate).between(today, today + 7 * days).map(toDate))
+
+log("arrayOf('days', toDate).between(today, today + 7 * days).map(toDate)", arrayOf('days', toDate).between(today, today + 7 * days).map(toDate))
+
+log("arrayOf({ days }, toDate).between(today, today + 7 * days).map(toDate)", arrayOf({ days }, toDate).between(today, today + 7 * days).map(toDate))
+
+// --------------------------------------------------
+
+log("format(now, { weekday: 'long' })", format(now, { weekday: 'long' }))
+
+log("format(now, toDate)", format(now, toDate))
+
+// --------------------------------------------------
+
+function log(msg, cmd) {
+    console.log()
+    console.log(msg)
+    console.log(cmd)
+}

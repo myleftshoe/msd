@@ -32,31 +32,37 @@ _format.proxyHandler = {
 }
 const format = new Proxy(_format, _format.proxyHandler)
 
-const range = (size, start = 0) => Array(size).fill(start).map((v, i) => v + i)
+function range (size, start = 0) {
+    if (size < 0) {
+        size = -size
+        start-= size
+    }
+    return Array(size).fill(start).map((v, i) => v + i)
+}
 const rangeOf = (unit, count, start = 0) => range(count, 0).map(n => n * unit + start)
 const between = (u, f) => (start, end) => rangeOf(u, (end - start) / u, start).map(format(f))
 const from = (u, n, f) => from => rangeOf(u, n).map(v => v + from).map(format(f))
 
-const _between = (u, f) => ({ between: between(u, f) })
-const _from = (u, n, f) => ({ from: from(u, n, f) })
-const _arrayOf = {
-    apply: (target, self, args) => {
-        switch (args.length) {
-            case 1: return _between(...args)
-            case 3: return _from(...args)
-            case 2: {
-                if (typeof args[1] === 'number')
-                    return _from(...args)
-                else
-                    return _between(...args)
-            }
+function parseArgs(a, b, c) {
+    switch (typeof a) {
+        case 'number': return { u: a, n: b, f: c }
+        case 'string': return { u: u[a], n: b, f: c }
+        case 'object': {
+            const k = Object.keys(a)[0];
+            return { u: u[k], n: a[k], f: b }
         }
     }
 }
-const arrayOf = new Proxy(_between, _arrayOf)
 
+const arrayOf = (...args) => {
+    const { u, n, f } = parseArgs(...args)
+    return {
+        between: between(u, f),
+        from: from(u, n, f),
+    }
+}
 
-module.exports = {
+const u = {
     seconds: s,
     days: d,
     minutes: m,
@@ -64,6 +70,10 @@ module.exports = {
     days: d,
     weeks: w,
     years: y,
+}
+
+module.exports = {
+    ...u,
     setLocale,
     now,
     today,

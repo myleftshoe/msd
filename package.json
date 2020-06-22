@@ -1,6 +1,6 @@
 {
   "name": "@mls44/msdate",
-  "version": "0.1.2",
+  "version": "2.1.0",
   "description": "js dates in milliseconds",
   "main": "index.js",
   "scripts": {
