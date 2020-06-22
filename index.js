@@ -27,10 +27,8 @@ function _format(ms, f) {
 const _formatfp = f => ms => _format(ms, f)
 const _formatph = {
     apply: (target, self, args) => {
-        if (args.length > 1)
-            return _format(...args)
-        else
-            return _formatfp(args[0])
+        if (args.length === 1) return _formatfp(args[0])
+        return _format(...args)
     }
 }
 const format = new Proxy(_format, _formatph)
