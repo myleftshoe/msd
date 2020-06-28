@@ -1,5 +1,5 @@
 {
-  "name": "@mls44/msdate",
+  "name": "@myleftshoe/msdate",
   "version": "2.1.0",
   "description": "js dates in milliseconds",
   "main": "index.js",
@@ -9,6 +9,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/myleftshoe/msdate.git"
+  },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/"
   },
   "keywords": [
     "js",
